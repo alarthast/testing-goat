@@ -1,5 +1,7 @@
-/.coverage*
-/.pytest-cache/
-/.venv/
-/__pycache__
-/htmlcov
+.coverage*
+.pytest-cache/
+.venv/
+__pycache__
+htmlcov
+.env
+db.sqlite3
