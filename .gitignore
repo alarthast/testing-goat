@@ -5,3 +5,4 @@ __pycache__
 htmlcov
 .env
 db.sqlite3
+/static
