@@ -1,3 +1,4 @@
+import os
 import time
 import unittest
 
@@ -28,6 +29,9 @@ def start_browser():
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = start_browser()
+        test_server = os.environ.get("TEST_SERVER")
+        if test_server:
+            self.live_server_url = "http://" + test_server
 
     def tearDown(self):
         self.browser.quit()
