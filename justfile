@@ -104,6 +104,8 @@ lint *args=".": devenv
 
 # run the various dev checks but does not change any files
 check: format lint
+    #!/usr/bin/env bash
+    docker run --rm -i ghcr.io/hadolint/hadolint:v2.12.0-alpine < Dockerfile
 
 
 # fix formatting and import sort ordering

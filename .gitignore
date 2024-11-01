@@ -6,3 +6,4 @@ htmlcov
 .env
 db.sqlite3
 /static
+src/db.sqlite3

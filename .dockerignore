@@ -12,3 +12,4 @@
 **/venv
 **/.coverage
 **/*.egg-info/
+src/db.sqlite3
