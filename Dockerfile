@@ -4,10 +4,13 @@ FROM python:3.12-slim
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-RUN pip install --no-cache-dir "django<6" gunicorn whitenoise
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
 
 COPY src /src
 
 WORKDIR /src
 
+ENV DJANGO_DEBUG_FALSE=1
 CMD ["gunicorn", "--bind", ":8888", "superlists.wsgi:application"]
