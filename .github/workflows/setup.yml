@@ -1,8 +1,6 @@
 name: Setup repository
 on:
   workflow_dispatch:
-  push:
-      branches: [main]
 jobs:
   setup:
     name: Initialise OpenSAFELY repo.
