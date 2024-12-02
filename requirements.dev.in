@@ -8,3 +8,6 @@ pip-tools
 pre-commit
 pyyaml
 ruff
+Django
+gunicorn
+whitenoise
