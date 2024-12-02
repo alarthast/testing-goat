@@ -91,9 +91,9 @@ upgrade env package="": virtualenv
 
 # *args is variadic, 0 or more. This allows us to do `just test -k match`, for example.
 # Run the tests
-test *args: devenv
-    $BIN/coverage run --module pytest {{ args }}
-    $BIN/coverage report || $BIN/coverage html
+test: devenv
+    $BIN/python src/manage.py test functional_tests
+    $BIN/python src/manage.py test lists
 
 
 format *args=".": devenv
