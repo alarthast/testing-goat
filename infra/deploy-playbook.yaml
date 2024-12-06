@@ -42,12 +42,11 @@
     - name: Ensure .env file exists
       ansible.builtin.template:
         src: env.j2
-        dest: /root/superlists.env
+        dest: ~/superlists.env
         force: false  # do not recreate file if it already exists.
       vars:
         host: "{{ inventory_hostname }}"
         secret_key: "{{ lookup('password', '/dev/null length=32 chars=ascii_letters') }}"
-      become: true
 
     - name: Ensure db.sqlite3 file exists outside container
       ansible.builtin.file:
@@ -66,10 +65,8 @@
             source: /home/alice/db.sqlite3
             target: /src/db.sqlite3
         ports: 80:8888
-      become: true
 
     - name: Run migration inside container
       community.docker.docker_container_exec:
         container: superlists
         command: ./manage.py migrate
-      become: true
