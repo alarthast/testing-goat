@@ -44,6 +44,9 @@ class FunctionalTest(StaticLiveServerTestCase):
                     raise
                 time.sleep(0.5)
 
+    def wait_for_element(self, by, value):
+        return self.wait_for(lambda: self.browser.find_element(by, value))
+
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
         while True:
