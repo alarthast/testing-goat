@@ -12,7 +12,7 @@ def home_page(request):
 
 def new_list(request):
     mylist = List.objects.create()
-    item = Item.objects.create(text=request.POST["item_text"], list=mylist)
+    item = Item.objects.create(text=request.POST["text"], list=mylist)
     try:
         item.full_clean()
         item.save()
@@ -28,7 +28,7 @@ def view_list(request, list_id):
     error = None
     if request.method == "POST":
         try:
-            item = Item(text=request.POST["item_text"], list=our_list)
+            item = Item(text=request.POST["text"], list=our_list)
             item.full_clean()
             item.save()
             return redirect(our_list)
