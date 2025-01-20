@@ -35,4 +35,4 @@ class ExistingListItemForm(ItemForm):
         try:
             self.instance.validate_unique()
         except ValidationError as e:
-            self.errors.update(e)
+            self._update_errors(e)
