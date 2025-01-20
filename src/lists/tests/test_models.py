@@ -13,11 +13,11 @@ class ItemModelTest(TestCase):
     def test_saving_and_retrieving_items(self):
         mylist = List.objects.create()
 
-        first_item = Item()
-        first_item.list = mylist
-        first_item.save()
+        item = Item()
+        item.list = mylist
+        item.save()
 
-        self.assertIn(first_item, mylist.item_set.all())
+        self.assertIn(item, mylist.item_set.all())
 
     def test_cannot_save_null_list_items(self):
         mylist = List.objects.create()
