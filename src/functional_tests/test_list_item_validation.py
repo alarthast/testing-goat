@@ -7,10 +7,10 @@ from .base import FunctionalTest
 
 
 class ItemValidationTest(FunctionalTest):
-    CSS_ERROR_ELEMENT = ".invalid-feedback"
+    ERROR_SELECTOR = ".invalid-feedback"
 
     def get_error_element(self):
-        return self.browser.find_element(By.CSS_SELECTOR, self.CSS_ERROR_ELEMENT)
+        return self.browser.find_element(By.CSS_SELECTOR, self.ERROR_SELECTOR)
 
     def test_cannot_add_empty_list_items(self):
         # Edith goes to the home page and accidentally tries to submit
@@ -56,9 +56,7 @@ class ItemValidationTest(FunctionalTest):
         self.get_item_input_box().send_keys(Keys.ENTER)
 
         # She sees a helpful error message
-        invalid_feedback = self.wait_for_element(
-            By.CSS_SELECTOR, self.CSS_ERROR_ELEMENT
-        )
+        invalid_feedback = self.wait_for_element(By.CSS_SELECTOR, self.ERROR_SELECTOR)
 
         self.assertEqual("You've already got this in your list", invalid_feedback.text)
 

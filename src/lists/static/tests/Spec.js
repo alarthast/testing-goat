@@ -1,6 +1,10 @@
 console.log("Spec.js loading");
 
 describe("Superlists tests", () => {
+  const inputId = "id_text";
+  const errorClass = "invalid-feedback";
+  const inputSelector = `#${inputId}`;
+  const errorSelector = `.${errorClass}`;
   let testDiv;
 
   beforeEach(() => {
@@ -9,7 +13,7 @@ describe("Superlists tests", () => {
     testDiv.innerHTML = `
       <form>
         <input
-          id="id_text"
+          id="${inputId}"
           name="text"
           class="form-control form-control-lg is-invalid"
           placeholder="Enter a to-do item"
@@ -17,7 +21,7 @@ describe("Superlists tests", () => {
           aria-describedby="id_text_feedback"
           required
         />
-        <div id="id_text_feedback" class="invalid-feedback">An error message</div>
+        <div id="id_text_feedback" class="${errorClass}">An error message</div>
       </form>
     `;
     document.body.appendChild(testDiv);
@@ -29,14 +33,14 @@ describe("Superlists tests", () => {
 
   it("sense-check our html fixture", () => {
     console.log("in test 1");
-    const errorMsg = document.querySelector(".invalid-feedback");
+    const errorMsg = document.querySelector(errorSelector);
     expect(errorMsg.checkVisibility()).toBe(true);
   });
 
   it("error message should be hidden on input", () => {
     console.log("in test 2");
-    const textInput = document.querySelector("#id_text");
-    const errorMsg = document.querySelector(".invalid-feedback");
+    const textInput = document.querySelector(inputSelector);
+    const errorMsg = document.querySelector(errorSelector);
 
     initialize();
     textInput.dispatchEvent(new InputEvent("input"));
@@ -45,7 +49,7 @@ describe("Superlists tests", () => {
   });
 
   it("error message should not be hidden before input is fired", () => {
-    const errorMsg = document.querySelector(".invalid-feedback");
+    const errorMsg = document.querySelector(errorSelector);
     initialize();
     expect(errorMsg.checkVisibility()).toBe(true);
   });
