@@ -1,9 +1,7 @@
-console.log("lists.js loading");
-const initialize = () => {
-  console.log("initialize called");
-  const textInput = document.querySelector("#id_text");
+const initialize = (inputSelector, errorSelector) => {
+  const textInput = document.querySelector(inputSelector);
   textInput.oninput = () => {
-    const errorMsg = document.querySelector(".invalid-feedback");
+    const errorMsg = document.querySelector(errorSelector);
     errorMsg.style.display = "none";
   };
 };
