@@ -6,6 +6,8 @@ describe("Superlists tests", () => {
   const inputSelector = `#${inputId}`;
   const errorSelector = `.${errorClass}`;
   let testDiv;
+  let textInput;
+  let errorMsg;
 
   beforeEach(() => {
     console.log("beforeEach");
@@ -25,6 +27,8 @@ describe("Superlists tests", () => {
       </form>
     `;
     document.body.appendChild(testDiv);
+    textInput = document.querySelector(inputSelector);
+    errorMsg = document.querySelector(errorSelector);
   });
 
   afterEach(() => {
@@ -32,16 +36,10 @@ describe("Superlists tests", () => {
   });
 
   it("sense-check our html fixture", () => {
-    console.log("in test 1");
-    const errorMsg = document.querySelector(errorSelector);
     expect(errorMsg.checkVisibility()).toBe(true);
   });
 
   it("error message should be hidden on input", () => {
-    console.log("in test 2");
-    const textInput = document.querySelector(inputSelector);
-    const errorMsg = document.querySelector(errorSelector);
-
     initialize();
     textInput.dispatchEvent(new InputEvent("input"));
 
@@ -49,7 +47,6 @@ describe("Superlists tests", () => {
   });
 
   it("error message should not be hidden before input is fired", () => {
-    const errorMsg = document.querySelector(errorSelector);
     initialize();
     expect(errorMsg.checkVisibility()).toBe(true);
   });
