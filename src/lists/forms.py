@@ -17,20 +17,10 @@ class ItemForm(forms.models.ModelForm):
                 attrs={
                     "placeholder": "Enter a to-do item",
                     "class": "form-control form-control-lg",
-                    "aria-describedby": "id_text_feedback",
                 }
             ),
         }
         error_messages = {"text": {"required": EMPTY_ITEM_ERROR}}
-
-    def is_valid(self):
-        # From https://stackoverflow.com/a/8256041
-        result = super().is_valid()
-        # loop on *all* fields if key '__all__' found else only on errors:
-        for x in self.fields if "__all__" in self.errors else self.errors:
-            attrs = self.fields[x].widget.attrs
-            attrs.update({"class": attrs.get("class", "") + " is-invalid"})
-        return result
 
     def save(self, for_list):
         self.instance.list = for_list
