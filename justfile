@@ -94,6 +94,8 @@ upgrade env package="": virtualenv
 test *args="lists": devenv
     $BIN/python src/manage.py test {{ args }}
 
+test-js : devenv
+    firefox src/lists/static/tests/SpecRunner.html
 
 format *args=".": devenv
     $BIN/ruff format --check {{ args }}
