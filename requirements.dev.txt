@@ -172,9 +172,9 @@ ruff==0.9.3 \
     --hash=sha256:cabc332b7075a914ecea912cd1f3d4370489c8018f2c945a30bcc934e3bc06a6 \
     --hash=sha256:eabe5eb2c19a42f4808c03b82bd313fc84d4e395133fb3fc1b1516170a31213c
     # via -r requirements.dev.in
-selenium==4.27.1 \
-    --hash=sha256:5296c425a75ff1b44d0d5199042b36a6d1ef76c04fb775b97b40be739a9caae2 \
-    --hash=sha256:b89b1f62b5cfe8025868556fe82360d6b649d464f75d2655cb966c8f8447ea18
+selenium==4.28.1 \
+    --hash=sha256:0072d08670d7ec32db901bd0107695a330cecac9f196e3afb3fa8163026e022a \
+    --hash=sha256:4238847e45e24e4472cfcf3554427512c7aab9443396435b1623ef406fff1cc1
     # via -r requirements.dev.in
 sniffio==1.3.1 \
     --hash=sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2 \
