@@ -1,4 +1,5 @@
 import os
+import platform
 import time
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
@@ -13,15 +14,17 @@ MAX_WAIT = 10
 
 
 def start_browser():
-    options = Options()
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    if platform.system() == "Linux":
+        options = Options()
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
 
-    geckodriver_path = "/snap/bin/geckodriver"
-    driver_service = Service(executable_path=geckodriver_path)
+        geckodriver_path = "/snap/bin/geckodriver"
+        driver_service = Service(executable_path=geckodriver_path)
 
-    browser = webdriver.Firefox(options=options, service=driver_service)
-    return browser
+        browser = webdriver.Firefox(options=options, service=driver_service)
+        return browser
+    return webdriver.Firefox()
 
 
 class FunctionalTest(StaticLiveServerTestCase):
