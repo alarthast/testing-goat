@@ -104,6 +104,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Email
+EMAIL_HOST = "smtp.mail.me.com"
+
+DEFAULT_FROM_EMAIL = os.environ["FROM_EMAIL"]
+
+EMAIL_HOST_USER = os.environ["EMAIL_USER"]
+
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
