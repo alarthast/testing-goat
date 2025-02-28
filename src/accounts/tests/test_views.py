@@ -2,6 +2,8 @@ from unittest import mock
 
 from django.test import TestCase
 
+from accounts.models import Token
+
 
 class SendLoginEmailViewTest(TestCase):
     def test_redirects_to_home_page(self):
@@ -36,3 +38,10 @@ class SendLoginEmailViewTest(TestCase):
             "Check your email, we've sent you a link you can use to log in.",
         )
         self.assertEqual(message.tags, "success")
+
+    def test_creates_token_associated_with_email(self):
+        self.client.post(
+            "/accounts/send_login_email", data={"email": "edith@example.com"}
+        )
+        token = Token.objects.get()
+        self.assertEqual(token.email, "edith@example.com")
