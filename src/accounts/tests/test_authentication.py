@@ -34,6 +34,7 @@ class AuthenticateTest(TestCase):
         )
         self.assertEqual(user, existing_user)
 
+
 class GetUserTest(TestCase):
     def test_gets_user_by_email(self):
         desired_user = User.objects.create(email="edith@example.com")
