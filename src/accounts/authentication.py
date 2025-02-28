@@ -5,11 +5,11 @@ class PasswordlessAuthenticationBackend:
     def authenticate(self, request, uid):
         try:
             token = Token.objects.get(uid=uid)
-            return User.objects.get(email=token.email)
-        except User.DoesNotExist:
-            return User.objects.create(email=token.email)
         except Token.DoesNotExist:
             return None
+        return self.get_user(email=token.email) or User.objects.create(
+            email=token.email
+        )
 
     def get_user(self, email):
         try:
