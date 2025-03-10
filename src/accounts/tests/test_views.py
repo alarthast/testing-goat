@@ -1,5 +1,6 @@
-from unittest import mock
+from unittest import expectedFailure, mock
 
+from django.contrib import auth
 from django.test import TestCase
 
 from accounts.models import Token
@@ -62,3 +63,15 @@ class LoginViewTest(TestCase):
     def test_redirects_to_home_page(self):
         response = self.client.get("/accounts/login?token=abcd123")
         self.assertRedirects(response, "/")
+
+    @expectedFailure
+    def test_logs_in_if_given_valid_token(self):
+        anon_user = auth.get_user(self.client)
+        self.assertEqual(anon_user.is_authenticated, False)
+
+        token = Token.objects.create(email="edith@example.com")
+        self.client.get(f"/accounts/login?token={token.uid}")
+
+        user = auth.get_user(self.client)
+        self.assertEqual(user.is_authenticated, True)
+        self.assertEqual(user.email, "edith@example.com")
