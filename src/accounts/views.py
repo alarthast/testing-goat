@@ -1,4 +1,4 @@
-from django.contrib import messages
+from django.contrib import auth, messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -28,4 +28,10 @@ def send_login_email(request):
 
 
 def login(request):
+    if Token.objects.filter(uid=request.GET["token"]).exists():
+        User = auth.get_user_model()
+        user = User.objects.create(email="edith@example.com")
+        auth.login(request, user)
+    else:
+        messages.error(request, "Invalid login link, please request a new one")
     return redirect("/")
