@@ -33,5 +33,7 @@ def login(request):
         # then auth.login() with the user if we get one,
         auth.login(request, user)
     # or messages.error() if we get None.
+    else:
+        messages.error(request, "Invalid login link, please request a new one")
     # messages.error(request, "Invalid login link, please request a new one")
     return redirect("/")
