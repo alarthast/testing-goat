@@ -1,4 +1,4 @@
-from django.contrib import messages
+from django.contrib import auth, messages
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -16,7 +16,7 @@ def send_login_email(request):
     send_mail(
         "Your login link for Superlists",
         message_body,
-        "noreply@superlists",
+        None,
         [email],
     )
 
@@ -28,4 +28,8 @@ def send_login_email(request):
 
 
 def login(request):
+    if user := auth.authenticate(uid=request.GET.get("token")):
+        auth.login(request, user)
+    else:
+        messages.error(request, "Invalid login link, please request a new one")
     return redirect("/")

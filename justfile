@@ -5,6 +5,7 @@ export PIP := BIN + if os_family() == "unix" { "/python -m pip" } else { "/pytho
 
 export DEFAULT_PYTHON := if os_family() == "unix" { "python3.12" } else { "python" }
 
+set dotenv-load := true
 
 # list available commands
 default:
@@ -117,7 +118,7 @@ fix: devenv
 
 # Run the dev project
 run: devenv
-    echo "Not implemented yet"
+    python src/manage.py runserver
 
 
 

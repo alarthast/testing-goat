@@ -92,6 +92,10 @@ DATABASES = {
 
 AUTH_USER_MODEL = "accounts.User"
 
+AUTHENTICATION_BACKENDS = [
+    "accounts.authentication.PasswordlessAuthenticationBackend",
+]
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -107,6 +111,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Email
+EMAIL_HOST = "smtp.mail.me.com"
+
+DEFAULT_FROM_EMAIL = os.environ.get("FROM_EMAIL")
+
+EMAIL_HOST_USER = os.environ.get("EMAIL_USER")
+
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
