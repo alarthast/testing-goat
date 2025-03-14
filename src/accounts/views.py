@@ -29,8 +29,9 @@ def send_login_email(request):
 
 def login(request):
     # TODO: call authenticate(),
-    auth.authenticate(uid=request.GET.get("token"))
-    # then auth.login() with the user if we get one,
+    if user := auth.authenticate(uid=request.GET.get("token")):
+        # then auth.login() with the user if we get one,
+        auth.login(request, user)
     # or messages.error() if we get None.
     # messages.error(request, "Invalid login link, please request a new one")
     return redirect("/")
