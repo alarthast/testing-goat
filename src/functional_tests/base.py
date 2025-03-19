@@ -19,6 +19,20 @@ def start_browser():
     return webdriver.Firefox()
 
 
+def wait(fn):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        while True:
+            try:
+                return fn(*args, **kwargs)
+            except (AssertionError, WebDriverException):
+                if time.time() - start_time > MAX_WAIT:
+                    raise
+                time.sleep(0.5)
+
+    return wrapper
+
+
 class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = start_browser()
@@ -29,15 +43,9 @@ class FunctionalTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+    @wait
     def wait_for(self, fn):
-        start_time = time.time()
-        while True:
-            try:
-                return fn()
-            except (AssertionError, WebDriverException):
-                if time.time() - start_time > MAX_WAIT:
-                    raise
-                time.sleep(0.5)
+        return fn()
 
     def wait_for_element(self, by, value):
         return self.wait_for(lambda: self.browser.find_element(by, value))
