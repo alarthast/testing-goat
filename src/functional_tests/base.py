@@ -55,5 +55,19 @@ class FunctionalTest(StaticLiveServerTestCase):
                     raise
                 time.sleep(0.5)
 
+    def wait_to_be_logged_in(self, email):
+        self.wait_for(
+            lambda: self.browser.find_element(By.CSS_SELECTOR, "#id_logout"),
+        )
+        navbar = self.browser.find_element(By.CSS_SELECTOR, ".navbar")
+        self.assertIn(email, navbar.text)
+
+    def wait_to_be_logged_out(self, email):
+        self.wait_for(
+            lambda: self.browser.find_element(By.CSS_SELECTOR, "input[name=email]")
+        )
+        navbar = self.browser.find_element(By.CSS_SELECTOR, ".navbar")
+        self.assertNotIn(email, navbar.text)
+
     def get_item_input_box(self):
         return self.browser.find_element(By.ID, "id_text")
