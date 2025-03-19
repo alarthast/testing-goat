@@ -57,15 +57,13 @@ class FunctionalTest(StaticLiveServerTestCase):
         rows = table.find_elements(By.TAG_NAME, "tr")
         self.assertIn(row_text, [row.text for row in rows])
 
-    @wait
     def wait_to_be_logged_in(self, email):
-        self.browser.find_element(By.CSS_SELECTOR, "#id_logout")
+        self.wait_for_element(By.CSS_SELECTOR, "#id_logout")
         navbar = self.browser.find_element(By.CSS_SELECTOR, ".navbar")
         self.assertIn(email, navbar.text)
 
-    @wait
     def wait_to_be_logged_out(self, email):
-        self.browser.find_element(By.CSS_SELECTOR, "input[name=email]")
+        self.wait_for_element(By.CSS_SELECTOR, "input[name=email]")
         navbar = self.browser.find_element(By.CSS_SELECTOR, ".navbar")
         self.assertNotIn(email, navbar.text)
 
