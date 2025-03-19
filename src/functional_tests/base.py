@@ -1,29 +1,16 @@
 import os
-import platform
 import time
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
 
 
 MAX_WAIT = 10
 
 
 def start_browser():
-    if platform.system() == "Linux":
-        options = Options()
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-
-        geckodriver_path = "/snap/bin/geckodriver"
-        driver_service = Service(executable_path=geckodriver_path)
-
-        browser = webdriver.Firefox(options=options, service=driver_service)
-        return browser
     return webdriver.Firefox()
 
 
