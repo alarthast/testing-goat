@@ -22,6 +22,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: browser-actions/setup-firefox@v1.5.4
       - uses: "opensafely-core/setup-action@v1"
         with:
           python-version: "3.12"
