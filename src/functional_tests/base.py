@@ -4,6 +4,7 @@ import time
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver import FirefoxOptions
 from selenium.webdriver.common.by import By
 
 
@@ -11,6 +12,10 @@ MAX_WAIT = 10
 
 
 def start_browser():
+    if not os.environ.get("GRAPHICAL_FUNCTIONAL_TESTS"):
+        options = FirefoxOptions()
+        options.add_argument("--headless")
+        return webdriver.Firefox(options=options)
     return webdriver.Firefox()
 
 
