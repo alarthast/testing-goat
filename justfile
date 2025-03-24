@@ -129,6 +129,9 @@ run-docker: devenv
         --mount type=bind,source="$PWD/src/db.sqlite3",target=/src/db.sqlite3 \
         -e DJANGO_SECRET_KEY=sekrit \
         -e DJANGO_ALLOWED_HOST=localhost \
+        -e FROM_EMAIL \
+        -e EMAIL_USER \
+        -e EMAIL_PASSWORD \
         -it superlists
 
 # Remove built assets and collected static files
