@@ -98,6 +98,9 @@ test *args="src": devenv
 test-docker *args="src": devenv # Paired with run-docker
     TEST_SERVER=localhost:8888 python src/manage.py test {{ args }}
 
+test-staging *args="src": devenv
+    TEST_SERVER="goatstaging.${SERVER_URL}" python src/manage.py test {{ args }}
+
 test-js : devenv
     firefox src/lists/static/tests/SpecRunner.html
 

@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 
 from .base import FunctionalTest
+from .container_commands import create_session_on_server
 from .management.commands.create_session import create_pre_authenticated_session
 
 
@@ -10,7 +11,10 @@ User = get_user_model()
 
 class MyListsTest(FunctionalTest):
     def create_pre_authenticated_session(self, email):
-        session_key = create_pre_authenticated_session(email)
+        if self.test_server:
+            session_key = create_session_on_server(self.test_server, email)
+        else:
+            session_key = create_pre_authenticated_session(email)
         ## to set a cookie we need to first visit the domain.
         ## 404 pages load the quickest!
         self.browser.get(self.live_server_url + "/404_no_such_url/")
