@@ -95,6 +95,12 @@ upgrade env package="": virtualenv
 test *args="src": devenv
     $BIN/python src/manage.py test {{ args }}
 
+test-docker *args="src": devenv # Paired with run-docker
+    TEST_SERVER=localhost:8888 python src/manage.py test {{ args }}
+
+test-staging *args="src": devenv
+    TEST_SERVER="goatstaging.${SERVER_URL}" python src/manage.py test {{ args }}
+
 test-js : devenv
     firefox src/lists/static/tests/SpecRunner.html
 
@@ -120,7 +126,16 @@ fix: devenv
 run: devenv
     python src/manage.py runserver
 
-
+run-docker: devenv
+    docker build -t superlists . && docker run \
+        -p 8888:8888 \
+        --mount type=bind,source="$PWD/src/db.sqlite3",target=/src/db.sqlite3 \
+        -e DJANGO_SECRET_KEY=sekrit \
+        -e DJANGO_ALLOWED_HOST=localhost \
+        -e FROM_EMAIL \
+        -e EMAIL_USER \
+        -e EMAIL_PASSWORD \
+        -it superlists
 
 # Remove built assets and collected static files
 assets-clean:
