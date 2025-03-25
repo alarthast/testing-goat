@@ -10,6 +10,12 @@ def create_session_on_server(host, email):
     )
 
 
+def reset_database(host):
+    return _exec_in_container(
+        host, ["/venv/bin/python", "/src/manage.py", "flush", "--noinput"]
+    )
+
+
 def _exec_in_container(host, commands):
     if "localhost" in host:
         return _exec_in_container_locally(commands)
