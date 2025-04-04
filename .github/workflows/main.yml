@@ -10,10 +10,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: "opensafely-core/setup-action@v1"
+      - uses: "opensafely-core/setup-action@8309ec8eb730c5b342dd496a09392f95bedd2fb0"
         with:
           python-version: "3.12"
           install-just: true
+      - name: Install uv
+        uses: astral-sh/setup-uv@4db96194c378173c656ce18a155ffc14a9fc4355
       - name: Check formatting, linting and import sorting
         run: just check
 
@@ -23,10 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: browser-actions/setup-firefox@v1.5.4
-      - uses: "opensafely-core/setup-action@v1"
+      - uses: "opensafely-core/setup-action@8309ec8eb730c5b342dd496a09392f95bedd2fb0"
         with:
           python-version: "3.12"
           install-just: true
+      - name: Install uv
+        uses: astral-sh/setup-uv@4db96194c378173c656ce18a155ffc14a9fc4355
       - name: Run tests
 #       env:  # Add environment variables required for tests
         run: |
