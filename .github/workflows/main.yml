@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: "opensafely-core/setup-action@v1"
+      - uses: "opensafely-core/setup-action@8309ec8eb730c5b342dd496a09392f95bedd2fb0"
         with:
           python-version: "3.12"
           install-just: true
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: browser-actions/setup-firefox@v1.5.4
-      - uses: "opensafely-core/setup-action@v1"
+      - uses: "opensafely-core/setup-action@8309ec8eb730c5b342dd496a09392f95bedd2fb0"
         with:
           python-version: "3.12"
           install-just: true
