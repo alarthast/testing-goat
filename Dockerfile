@@ -1,7 +1,8 @@
 # I was using 3.12 throughout the tutorial so use 3.12 instead
 FROM python:3.12-slim
 
-RUN python -m pip install uv
+# hadolint ignore=DL3013
+RUN python -m pip install uv --no-cache-dir
 
 ENV UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
