@@ -1,8 +1,7 @@
 # I was using 3.12 throughout the tutorial so use 3.12 instead
 FROM python:3.12-slim
 
-# hadolint ignore=DL3013
-RUN python -m pip install uv --no-cache-dir
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 ENV UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
@@ -13,9 +12,10 @@ ENV UV_LINK_MODE=copy \
 RUN uv venv --python-preference system
 ENV PATH="/venv/bin:$PATH"
 
-COPY pyproject.toml /pyproject.toml
-COPY uv.lock /uv.lock
-RUN uv sync  --frozen --no-dev --no-install-project
+RUN --mount=type=cache,target=/root/.cache \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync  --frozen --no-dev --no-install-project
 
 COPY src /src
 
