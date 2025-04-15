@@ -46,7 +46,7 @@ _uv *args: virtualenv
         export UV_EXCLUDE_NEWER=$TIMESTAMP
     fi
 
-    uv {{ args }}
+    uv {{ args }} || exit 1
 
 # wrap `uv lock`: update `uv.lock` if dependencies in `pyproject.toml` have changed
 lock *args: virtualenv (_uv "lock " + args)
@@ -144,7 +144,7 @@ lint *args=".": devenv
     $BIN/ruff check {{ args }}
 
 # run the various dev checks but does not change any files
-check: format lint
+check: (_uv "lock --check") format lint
     #!/usr/bin/env bash
     docker run --rm -i ghcr.io/hadolint/hadolint:v2.12.0-alpine < Dockerfile
 
