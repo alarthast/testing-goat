@@ -47,3 +47,6 @@ class ListPage:
                 email, [item.text for item in self.get_sharee_list()]
             )
         )
+
+    def get_list_owner(self):
+        return self.test.wait_for_element(By.ID, "id_list_owner").text
