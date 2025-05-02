@@ -155,6 +155,13 @@ class ListViewTest(TestCase):
         self.assertEqual(Item.objects.all().count(), 1)
 
 
+class ShareListTest(TestCase):
+    def test_redirects_to_list_view(self):
+        list1 = List.objects.create()
+        response = self.client.post(f"/lists/{list1.id}/share")
+        self.assertRedirects(response, f"/lists/{list1.id}/")
+
+
 class MyListsTest(TestCase):
     def test_my_lists_url_renders_my_lists_template(self):
         User.objects.create(email="a@b.com")
