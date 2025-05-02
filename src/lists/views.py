@@ -38,6 +38,25 @@ def view_list(request, list_id):
     return render(request, "list.html", {"list": our_list, "form": form})
 
 
+def share_list(request, list_id):
+    if request.method == "POST":
+        the_list = List.objects.get(id=list_id)
+        sharee = request.POST.get("sharee")
+        if sharee:
+            try:
+                sharee = User.objects.get(email=sharee)
+                the_list.shared_with.add(sharee)
+            except User.DoesNotExist:
+                return render(
+                    request,
+                    "list.html",
+                    {"list": the_list, "sharee_error": True},
+                )
+        return redirect(the_list)
+
+    assert False, "Only POST method is allowed"
+
+
 def my_lists(request, email):
     owner = User.objects.get(email=email)
     return render(request, "my_lists.html", {"owner": owner})
