@@ -5,6 +5,14 @@
 {% block extra_header %}
   {% url 'view_list' list.id as form_action %}
   {% include "form.html" with form=form form_action=form_action %}
+  <div class="share-input-group">
+    <input
+      id="id_sharee_input"
+      name="sharee"
+      placeholder="your-friend@example.com"
+    />
+    {% csrf_token %}
+  </div>
 {% endblock %}
 
 {% block content %}
