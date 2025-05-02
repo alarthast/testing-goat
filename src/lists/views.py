@@ -43,8 +43,17 @@ def share_list(request, list_id):
         the_list = List.objects.get(id=list_id)
         sharee = request.POST.get("sharee")
         if sharee:
-            the_list.shared_with.add(sharee)
+            try:
+                sharee = User.objects.get(email=sharee)
+                the_list.shared_with.add(sharee)
+            except User.DoesNotExist:
+                return render(
+                    request,
+                    "list.html",
+                    {"list": the_list, "sharee_error": True},
+                )
         return redirect(the_list)
+
     assert False, "Only POST method is allowed"
 
 

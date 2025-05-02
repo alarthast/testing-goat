@@ -170,6 +170,16 @@ class ShareListTest(TestCase):
         )
         self.assertEqual(list(list1.shared_with.all()), [sharee])
 
+    def test_post_shows_error_if_email_is_invalid(self):
+        list1 = List.objects.create()
+        response = self.client.post(
+            f"/lists/{list1.id}/share",
+            data={"sharee": "invalid email"},
+        )
+        expected_error = escape("That user does not exist.")
+        self.assertContains(response, expected_error)
+        self.assertEqual(list1.shared_with.count(), 0)
+
 
 class MyListsTest(TestCase):
     def test_my_lists_url_renders_my_lists_template(self):
