@@ -1,5 +1,3 @@
-import unittest
-
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.utils.html import escape
@@ -163,15 +161,14 @@ class ShareListTest(TestCase):
         response = self.client.post(f"/lists/{list1.id}/share")
         self.assertRedirects(response, f"/lists/{list1.id}/")
 
-    @unittest.skip
     def test_post_adds_email_to_shared_with(self):
         list1 = List.objects.create()
-        sharee = User.objects.create(email="a@b.com")
+        sharee = User.objects.create(email="c@d.com")
         self.client.post(
             f"/lists/{list1.id}/share",
-            data={"email": sharee.email},
+            data={"sharee": sharee.email},
         )
-        self.assertIn(sharee, list1.shared_with.all())
+        self.assertEqual(list(list1.shared_with.all()), [sharee])
 
 
 class MyListsTest(TestCase):
