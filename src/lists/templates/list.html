@@ -19,6 +19,14 @@
     </table>
   </div>
 </div>
+<div class="row" >
+{% if list.owner %}
+  <div class="col-lg-6">
+    This list is owned by:
+    <p id="id_list_owner">{{ list.owner.email }}</p>
+  </div>
+{% endif %}
+</div>
 <div class="row">
   <div>
     Share this list:
