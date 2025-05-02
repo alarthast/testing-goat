@@ -5,14 +5,6 @@
 {% block extra_header %}
   {% url 'view_list' list.id as form_action %}
   {% include "form.html" with form=form form_action=form_action %}
-  <div class="share-input-group">
-    <input
-      id="id_sharee_input"
-      name="sharee"
-      placeholder="your-friend@example.com"
-    />
-    {% csrf_token %}
-  </div>
 {% endblock %}
 
 {% block content %}
@@ -25,6 +17,23 @@
       </tr>
       {% endfor %}
     </table>
+  </div>
+</div>
+<div class="row">
+  <div>
+    Share this list:
+    <div class="input-group">
+      <form method="POST" action="{% url 'share_list' list.id %}">
+        <input id="id_sharee_input" name="sharee" class="form-control" placeholder="your-friend@example.com" />
+        {% csrf_token %}
+    </div>
+    <ul>
+      {% for sharee in list.shared_with.all %}
+      <li class="list-sharee">
+        {{ sharee.email }}
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 {% endblock %}
