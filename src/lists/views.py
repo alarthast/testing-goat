@@ -39,8 +39,10 @@ def view_list(request, list_id):
 
 
 def share_list(request, list_id):
-    the_list = List.objects.get(id=list_id)
-    return redirect(the_list)
+    if request.method == "POST":
+        the_list = List.objects.get(id=list_id)
+        return redirect(the_list)
+    assert False, "Only POST method is allowed"
 
 
 def my_lists(request, email):
