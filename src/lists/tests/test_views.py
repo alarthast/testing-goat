@@ -161,6 +161,15 @@ class ShareListTest(TestCase):
         response = self.client.post(f"/lists/{list1.id}/share")
         self.assertRedirects(response, f"/lists/{list1.id}/")
 
+    def test_post_adds_email_to_shared_with(self):
+        list1 = List.objects.create()
+        sharee = User.objects.create(email="a@b.com")
+        self.client.post(
+            f"/lists/{list1.id}/share",
+            data={"email": sharee.email},
+        )
+        self.assertIn(sharee, list1.shared_with.all())
+
 
 class MyListsTest(TestCase):
     def test_my_lists_url_renders_my_lists_template(self):
