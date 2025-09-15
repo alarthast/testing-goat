@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v5
-      - uses: browser-actions/setup-firefox@v1.5.4
+      - uses: browser-actions/setup-firefox@v1.7.0
       - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
         with:
           python-version: "3.12"
