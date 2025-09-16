@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
+      - uses: "opensafely-core/setup-action@aw/add-default-false-to-installuv"
         with:
           python-version: "3.12"
           install-just: true
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: browser-actions/setup-firefox@v1.5.4
-      - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
+      - uses: "opensafely-core/setup-action@aw/add-default-false-to-installuv"
         with:
           python-version: "3.12"
           install-just: true
