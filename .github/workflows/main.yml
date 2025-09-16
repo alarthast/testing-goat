@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: "opensafely-core/setup-action@aw/add-default-false-to-installuv"
+      - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
         with:
           python-version: "3.12"
-          install-just: true
+          install-just: false
           install-uv: true
           cache: null # uv projects do not use the cache
       - name: Check formatting, linting and import sorting
@@ -25,10 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: browser-actions/setup-firefox@v1.5.4
-      - uses: "opensafely-core/setup-action@aw/add-default-false-to-installuv"
+      - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
         with:
           python-version: "3.12"
-          install-just: true
+          install-just: false
           install-uv: true
           cache: null # uv projects do not use the cache
       - name: Run tests
