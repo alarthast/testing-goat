@@ -10,12 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: "opensafely-core/setup-action@aw/enable-uv-caching"
+      - uses: "opensafely-core/setup-action@v1"
         with:
           python-version: "3.12"
           install-just: true
           install-uv: true
-          cache: null # uv projects do not use the cache
       - name: Check formatting, linting and import sorting
         run: just check
 
@@ -25,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: browser-actions/setup-firefox@v1.5.4
-      - uses: "opensafely-core/setup-action@aw/enable-uv-caching"
+      - uses: "opensafely-core/setup-action@v1"
         with:
           python-version: "3.12"
           install-just: true
