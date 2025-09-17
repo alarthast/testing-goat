@@ -30,7 +30,7 @@ jobs:
           python-version: "3.12"
           install-just: true
           install-uv: true
-          cache: ''
+          cache: 'poetry'
       - name: Run tests
         env:
           MOZ_HEADLESS: 1
