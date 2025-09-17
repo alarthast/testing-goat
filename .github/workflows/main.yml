@@ -15,6 +15,7 @@ jobs:
           python-version: "3.12"
           install-just: true
           install-uv: true
+          cache: uv
       - name: Check formatting, linting and import sorting
         run: just check
 
@@ -29,7 +30,7 @@ jobs:
           python-version: "3.12"
           install-just: true
           install-uv: true
-          cache: 'pip'
+          cache: uv
       - name: Run tests
         env:
           MOZ_HEADLESS: 1
