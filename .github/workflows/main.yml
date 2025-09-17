@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
+      - uses: "opensafely-core/setup-action@aw/enable-uv-caching"
         with:
           python-version: "3.12"
           install-just: true
@@ -25,12 +25,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: browser-actions/setup-firefox@v1.5.4
-      - uses: "opensafely-core/setup-action@aw/add-option-to-install-uv"
+      - uses: "opensafely-core/setup-action@aw/enable-uv-caching"
         with:
           python-version: "3.12"
           install-just: true
           install-uv: true
-          cache: null # uv projects do not use the cache
+          cache: ''
       - name: Run tests
         env:
           MOZ_HEADLESS: 1
